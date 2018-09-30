@@ -1,4 +1,4 @@
-package com.example.rabbit.sent;
+package com.example.rabbit.topic.sent;
 
 import com.alibaba.fastjson.JSON;
 import com.example.rabbit.pojo.User;
@@ -16,38 +16,45 @@ import java.util.Date;
  * 消息生产者
  */
 @Controller
-public class SentTest {
+public class SentTestDemo {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    /**
-     * 队列名称
-     */
-    @Value( "${QUEUE_NAME}" )
-    private String QUEUE_NAME;
+
 
     /**
-     * 队列名称
+     *方式一
+     *
+     * @param i
      */
-    @Value( "${QUEUE_NAME1}" )
-    private String QUEUE_NAME1;
-
-    public void send() throws Exception{
-        String context = "开始生产消息 " + new Date();
-        this.rabbitTemplate.convertAndSend(context);
-    }
-
-
-
-    public void send1(int i) {
+    public void send2(int i) {
         //生产的消息
         User user = new User( 156,"sd" );
-        String json = JSON.toJSONString( user );
+        String json = "my topic 1";
         String context = "生产者----mesage---->"+i;
         System.out.println("！！！ " + context);
-        this.rabbitTemplate.convertAndSend(QUEUE_NAME, json);
-        this.rabbitTemplate.convertAndSend(QUEUE_NAME1, json);
+        this.rabbitTemplate.convertAndSend("exchange","topic.message", json);
+
     }
+
+
+    /**
+     *方式二
+     * .#会匹配所有的key
+     * @param i
+     */
+    public void send3(int i) {
+        //生产的消息
+        User user = new User( 156,"sd" );
+        String json = "my topic 2";
+        String context = "生产者----mesage---->"+i;
+        System.out.println("！！！ " + context);
+        this.rabbitTemplate.convertAndSend("exchange", "topic.messages",json);
+
+    }
+
+
+
 
 
 

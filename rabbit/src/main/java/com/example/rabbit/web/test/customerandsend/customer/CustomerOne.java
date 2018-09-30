@@ -1,4 +1,4 @@
-package com.example.rabbit.web.test.customer;
+package com.example.rabbit.web.test.customerandsend.customer;
 
 import com.example.rabbit.utils.ConnectionFactoryUtil;
 import com.rabbitmq.client.Channel;
@@ -12,7 +12,8 @@ import org.junit.Test;
  * @Author : Wukn
  * @Date : 2018/9/30
  */
-public class CustomerTow {
+public class CustomerOne {
+
 
     public  String QUEUE_NAME2 = "test_simple_queue";
 
@@ -20,7 +21,7 @@ public class CustomerTow {
 
 
     /**
-     * 消费消息1
+     * 消费消息2
      */
     @Test
     public void test03() {
@@ -44,13 +45,23 @@ public class CustomerTow {
                 // 从consumer中获取队列中的消息,nextDelivery是一个阻塞方法,如果队列中无内容,则等待
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery();
                 String message = new String(delivery.getBody());
-                System.out.println("【消费者1接收到了\" + QUEUE_NAME + \"中的消息:】---" + message);
+                System.out.println("【消费者2接收到了\" + QUEUE_NAME + \"中的消息:】---" + message);
             }
         } catch (Exception e) {
             e.printStackTrace( );
         }
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,9 @@
-package com.example.rabbit.web.test.send;
+package com.example.rabbit.web.test.customerandsend.send;
 
 import com.example.rabbit.utils.ConnectionFactoryUtil;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * ***GOOD LUCK****
